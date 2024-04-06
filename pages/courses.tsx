@@ -1,5 +1,6 @@
 import List from '../components/List';
 import TopBar from '../components/TopBar';
+import Link from 'next/link';
 
 const Courses = () => {
 
@@ -11,6 +12,7 @@ const Courses = () => {
       <>
         <TopBar />
         <div>
+        <Link href="/tasks"> Assignments</Link>
           <List items={CourseList} />
         </div>
       </>

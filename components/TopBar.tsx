@@ -6,7 +6,7 @@ const TopBar = () => {
   return (
     <nav className={styles.topbar}>
       <div className={styles.left}>
-        <Link href="/">Shiza'24</Link>
+        <Link href="/">Todo </Link>
       </div>
       <div className={styles.right}>
         <Link href="/about">About</Link>
@@ -15,6 +15,7 @@ const TopBar = () => {
         </Link>
       </div>
     </nav>
+
   );
 }
 
