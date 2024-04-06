@@ -2,11 +2,11 @@
 export default function List({items}) {
     return (
         <div>
-            <ul>
-                {items.map((item, index) => (
-                    <li key={index}> {item} </li>
-                ))}
-            </ul>
+           
+        {items.map((item, index) => (
+            <p key={index}> {item} </p>
+        ))}
+            
         </div>
     );
 }

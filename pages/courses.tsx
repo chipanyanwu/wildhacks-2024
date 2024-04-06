@@ -9,7 +9,7 @@ export default function Courses() {
                       "Cloud Computing"];
     return (
       <div>
-       <List items={CourseList} />;
+       <List items={CourseList} />
       </div>
     );
   }
