@@ -1,15 +1,15 @@
+import List from '../components/List';
 
 
 export default function Courses() {
+
+  const CourseList = ["Web Development", 
+                      "Data Science", 
+                      "Artificial Intelligence", 
+                      "Cloud Computing"];
     return (
       <div>
-        <h1>Sample Courses</h1>
-        <ul>
-          <li>Web Development</li>
-          <li>Data Science</li>
-          <li>Artificial Intelligence</li>
-          <li>Cloud Computing</li>
-        </ul>
+       <List items={CourseList} />;
       </div>
     );
   }
