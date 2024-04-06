@@ -2,6 +2,14 @@ const express = require('express');
 const connectDB = require('./db.js');
 const router = express.Router();
 
+const app = express();
+const PORT = 3000;
+
+const coursesRoute = require('./routes/courses.js');
+const assignmentsRoute = require('./routes/assignments.js');
+
+
+
 async function getDatabase() {
     try {
         const client = await connectDB();
@@ -13,3 +21,12 @@ async function getDatabase() {
 }
 
 getDatabase();
+
+app.use('/courses', coursesRoute);
+app.use('/assignments', assignmentsRoute);
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
+
