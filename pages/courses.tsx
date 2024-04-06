@@ -1,17 +1,20 @@
 import List from '../components/List';
-// import '../styles/globals.css'
+import TopBar from '../components/TopBar';
 
-
-
-export default function Courses() {
+const Courses = () => {
 
   const CourseList = ["Web Development", 
                       "Data Science", 
                       "Artificial Intelligence", 
                       "Cloud Computing"];
     return (
-      <div>
-       <List items={CourseList} />
-      </div>
+      <>
+        <TopBar />
+        <div>
+          <List items={CourseList} />
+        </div>
+      </>
     );
   }
+
+export default Courses;
