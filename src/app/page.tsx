@@ -1,18 +1,20 @@
 import Link from 'next/link';
+import TopBar from '../../components/TopBar';
 
-export default function Home() {
+const Home = () => {
   return (
-    <div>
-      <h1>Welcome to ToDo App</h1>
-      <p>This is a simple website that will help you build new worlds!!</p>
-
-      <ul>
-        <li><Link href="/courses">Courses</Link></li>
-        <li><Link href="/things">Things</Link></li>
-        <li><Link href="/todopage">Todo Page</Link></li>
-      </ul>
-
-
-    </div>
+    <>
+      <TopBar />
+        <div>
+          <h1>Welcome to ToDo App</h1>
+          <p>This is a simple website that will help you build new worlds!!</p>
+          <ul>
+            <li><Link href="/courses">Courses</Link></li>
+          </ul>
+      </div>
+    </>
+    
   );
 }
+
+export default Home;

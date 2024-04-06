@@ -1,8 +1,6 @@
 import List from '../components/List';
 // import '../styles/globals.css'
 
-
-
 export default function Courses() {
 
   const CourseList = ["Web Development", 

@@ -1,0 +1,27 @@
+.topbar {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between; /* This spreads out the child elements */
+    align-items: center; /* Center the items vertically */
+    padding: 0 20px; /* Add some padding on the left and right */
+  }
+  
+  .left, .right {
+    display: flex;
+    align-items: center; /* Center the items vertically */
+  }
+
+  .link, .left a, .right a {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    }  
+  
+  .link:hover, .left a:hover, .right a:hover {
+    background-color: #ddd; /* Light grey background on hover */
+    color: black; /* Black text color on hover */
+  }
+  
