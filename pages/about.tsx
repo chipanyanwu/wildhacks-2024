@@ -1,24 +1,37 @@
 import Head from 'next/head';
 import Navbar from '../components/TopBar'; // Assuming you have a Navbar component
+import styles from '../styles/Home.module.css'
 
 const About = () => {
   return (
     <div>
       <Head>
-        <title>About Us</title>
-        <meta name="description" content="Learn more about us and our mission." />
+        <title>About Us - ClassCompass</title>
+        <meta name="description" content="Learn more about the ClassCompass project and the team behind it." />
       </Head>
       <Navbar />
-      <main style={{ padding: "20px" }}>
-        <h1>About Us</h1>
-        <p>
-          Welcome to our website! We are a team dedicated to providing the best services in our industry. Our mission is to make a significant positive impact on our community and beyond through our products and services. 
+      <main className={styles.mainContent}>
+        <h1 className={styles.title}>About Us</h1>
+        <p className={styles.paragraph}>
+          Welcome to <span style={{ color: '#3b8ee6' }}><strong>ClassCompass</strong></span> This project is developed as part of WildHacks Hackathon 2024, where teams of talented students come together to create innovative solutions to real-world problems.
         </p>
-        <p>
-          Founded in [Your Foundation Year], we have grown from a small startup into a key player in our market. Our journey has been fueled by hard work, innovation, and a commitment to excellence. We believe in continuous improvement and are always looking for ways to better serve our customers and community.
+        <p className={styles.paragraph}>
+          We are a team of Northwestern University students who share a passion for computer science, data science, and engineering. Meet our team members:
         </p>
-        <p>
-          Thank you for visiting our site and taking the time to learn more about us. If you have any questions or would like to get in touch, please don't hesitate to contact us.
+        <ul>
+          <li className={styles.listItem}>Desmond Nebah - CS with a minor in Data Science</li>
+          <li className={styles.listItem}>Amiin Muse - CS with a minor in Data Science</li>
+          <li className={styles.listItem}>Herbert Botwe - CS with a minor in Science</li>
+          <li className={styles.listItem}>Shingie Tande - Industrial Engineering with a minor in CS</li>
+        </ul>
+        <p className={styles.paragraph}>
+          We are all set to graduate in June 2025 and are excited to leverage our diverse skill sets to build helpful solutions.
+        </p>
+        <p className={styles.paragraph}>
+          ClassCompass aims to provide students with a structured platform to manage their coursework and assignments effectively. We believe that our tool can significantly enhance the learning experience by providing a clear, step-by-step approach to tackling educational challenges.
+        </p>
+        <p className={styles.paragraph}>
+          Thank you for taking the time to learn more about our project. We are eager to make a positive impact and welcome any feedback or inquiries you may have about ClassCompass.
         </p>
       </main>
     </div>

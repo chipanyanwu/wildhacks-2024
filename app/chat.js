@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: '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',
+  apiKey: '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',
   dangerouslyAllowBrowser: true
 });
 
