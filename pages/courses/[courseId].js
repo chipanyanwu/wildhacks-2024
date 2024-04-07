@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import TopBar from '../../components/TopBar';
-import styles from '../../styles/Course.module.css'; // Ensure you have this CSS file
+import styles from '../../styles/Course.module.css';
 
 const Course = () => {
   const router = useRouter();
@@ -12,6 +12,7 @@ const Course = () => {
   const [allAssignments, setAllAssignments] = useState([]);
   const [assignments, setAssignments] = useState([]);
   const [selectedAssignment, setSelectedAssignment] = useState(null);
+  // const getSubTasksFromDescription = require('../openai.js');
 
   useEffect(() => {
     const fetchAssignments = async () => {
@@ -34,8 +35,10 @@ const Course = () => {
     }
   }, [courseId, allAssignments]);
 
-  const selectAssignment = (assignment) => {
+  const selectAssignment = async (assignment) => {
     setSelectedAssignment(assignment);
+    // const subTasks = await getSubTasksFromDescription(assignment.description);
+    // console.log("Generated Sub-Tasks:", subTasks);
   };
 
   return (
