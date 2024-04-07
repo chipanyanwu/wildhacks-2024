@@ -1,0 +1,21 @@
+.courseLayout {
+    display: flex;
+  }
+  
+  .sidebar {
+    flex: 1;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .mainContent {
+    flex: 3;
+    padding: 20px;
+  }
+  
+  .assignmentLink {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+  }
+  
