@@ -55,7 +55,7 @@ const Course = () => {
 
     event.preventDefault();
 
-    console.log("Adding new task");
+    console.log("Adding new task is being called");
     const assignmentName = document.getElementById("assignmentName").value;
     const assignmentDueDate = document.getElementById("assignmentDueDate").value;
     const assignmentDescription = document.getElementById("assignmentDescription").value; // Ensure this ID matches your input field for description
@@ -137,7 +137,7 @@ const Course = () => {
               <input id="assignmentDueDate" type="date" className={Newstyles.input} />
               <label htmlFor="assignmentDescription" className={Newstyles.label}>Description:</label>
               <textarea id="assignmentDescription" placeholder="Enter description" className={Newstyles.textarea}></textarea>
-              <button type="submit" onClick={(event) => addNewTask(event)} className={styles.button}>Submit</button>
+              <button type="submit" onClick={addNewTask} className={styles.button}>Submit</button>
             </form>
           ) :           
           selectedAssignment ? (
