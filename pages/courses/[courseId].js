@@ -64,9 +64,9 @@ const Course = () => {
     try {
       // Assume splitTask returns a valid response with a choices array
       const gptResponse = await splitTask(assignmentDescription);
-      const content = gptResponse.message.content;
-      const components = content.split(/\d+\.\s/).filter(Boolean);
-      console.log(components);
+      //const content = gptResponse.message.content;
+      //const components = content.split(/\d+\.\s/).filter(Boolean);
+      //console.log(components);
   
       // Create the task object
       const newTask = {
@@ -74,7 +74,7 @@ const Course = () => {
         name: assignmentName,
         due_date: assignmentDueDate,
         description: assignmentDescription,
-        components: components
+        components: gptResponse
       };
       // console.log(newTask);
       // Perform the POST request
@@ -88,7 +88,7 @@ const Course = () => {
       });
   
       const result = await response.json();
-      console.log(result);
+   
   
       // Handle the response here. If successful, maybe clear the form or redirect the user.
       // window.location.reload();
@@ -129,15 +129,15 @@ const Course = () => {
 
         </aside>
         <main className={styles.mainContent}>
-        {buttonOn ? (
-            <form className={Newstyles.form}>
-              <label htmlFor="assignmentName" className={Newstyles.label}>Assignment Name:</label>
-              <input id="assignmentName" type="text" placeholder="Enter name" className={Newstyles.input} />
-              <label htmlFor="assignmentDueDate" className={Newstyles.label}>Due Date:</label>
-              <input id="assignmentDueDate" type="date" className={Newstyles.input} />
-              <label htmlFor="assignmentDescription" className={Newstyles.label}>Description:</label>
-              <textarea id="assignmentDescription" placeholder="Enter description" className={Newstyles.textarea}></textarea>
-              <button type="submit" onClick={addNewTask} className={styles.button}>Submit</button>
+          {buttonOn? (
+            <form onSubmit = {addNewTask}>
+              <label htmlFor="assignmentName">Assignment Name:</label>
+              <input id="assignmentName" type="text" placeholder="Enter name" />
+              <label htmlFor="assignmentDueDate">Due Date:</label>
+              <input id="assignmentDueDate" type="date" />
+              <label htmlFor="assignmentDescription">Description:</label>
+              <textarea id="assignmentDescription" placeholder="Enter description"></textarea>
+              <button type="submit" >Submit</button>
             </form>
           ) :           
           selectedAssignment ? (
