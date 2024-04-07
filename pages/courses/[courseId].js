@@ -7,6 +7,7 @@ import TopBar from '../../components/TopBar';
 import styles from '../../styles/Course.module.css'; // Ensure you have this CSS file
 import { set } from 'mongoose';
 const  splitTask  = require('../../openai.js');
+import Newstyles from '../../styles/Home.module.css'; 
 
 
 const Course = () => {
@@ -113,7 +114,7 @@ const Course = () => {
           <ul>
             {assignments.map((assignment) => (
               <li key={assignment._id} onClick={() => selectAssignment(assignment)}>
-                <a className={styles.assignmentLink}>{assignment.name}</a>
+                <a className={Newstyles.assignmentList}>{assignment.name}</a>
               </li>
 
             // <li key={assignment._id} onClick={() => selectAssignment(assignment)}>
@@ -122,28 +123,30 @@ const Course = () => {
               
             ))}
           </ul>
-          <button onClick = {handleClick}>Add New Assignment</button>
+          <div className="buttonContainer">
+          <button onClick = {handleClick} className={Newstyles.assignmentLink}>Add New Assignment</button>
+          </div>
+
         </aside>
         <main className={styles.mainContent}>
-          {buttonOn? (
-            <form>
-              <label htmlFor="assignmentName">Assignment Name:</label>
-              <input id="assignmentName" type="text" placeholder="Enter name" />
-              <label htmlFor="assignmentDueDate">Due Date:</label>
-              <input id="assignmentDueDate" type="date" />
-              <label htmlFor="assignmentDescription">Description:</label>
-              <textarea id="assignmentDescription" placeholder="Enter description"></textarea>
-              <button type="submit" onClick = {(event) => addNewTask(event)}>Submit</button>
+        {buttonOn ? (
+            <form className={Newstyles.form}>
+              <label htmlFor="assignmentName" className={Newstyles.label}>Assignment Name:</label>
+              <input id="assignmentName" type="text" placeholder="Enter name" className={Newstyles.input} />
+              <label htmlFor="assignmentDueDate" className={Newstyles.label}>Due Date:</label>
+              <input id="assignmentDueDate" type="date" className={Newstyles.input} />
+              <label htmlFor="assignmentDescription" className={Newstyles.label}>Description:</label>
+              <textarea id="assignmentDescription" placeholder="Enter description" className={Newstyles.textarea}></textarea>
+              <button type="submit" onClick={(event) => addNewTask(event)} className={styles.button}>Submit</button>
             </form>
-          ):
-          
+          ) :           
           selectedAssignment ? (
             <>
-              <h2>{selectedAssignment.name}</h2>
-              <p>Due: {new Date(selectedAssignment.due_date).toLocaleDateString()}</p>
-              <p>{selectedAssignment.description}</p>
+              <h2 className={Newstyles.title}>{selectedAssignment.name}</h2>
+              <p className={Newstyles.paragraph}>Due: {new Date(selectedAssignment.due_date).toLocaleDateString()}</p>
+              <p className={Newstyles.paragraph}>{selectedAssignment.description}</p>
               <h3>Components</h3>
-              <ul>
+              <ul className={Newstyles.paragraph}>
                 {Object.entries(selectedAssignment.components).map(([key, value], index) => (
                   <li key={index}>{value}</li>
                 ))}
@@ -152,7 +155,7 @@ const Course = () => {
           ) :
           
           (
-            <p>Select an assignment to view details.</p>
+            <p className={Newstyles.title}>Select an assignment to view details.</p>
           )}
           
         </main>
