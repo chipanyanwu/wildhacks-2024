@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import TopBar from '../../components/TopBar';
 import styles from '../../styles/Course.module.css'; // Ensure you have this CSS file
+const  splitTask  = require('../../openai.js');
+
 
 const Course = () => {
   const router = useRouter();
@@ -43,8 +45,52 @@ const Course = () => {
   const [buttonOn, setButtonOn] = useState(false);
   const handleClick = () => {
     setButtonOn(true);
-    
   }
+
+  //THis function takes in input from the add new task button, sends to chat gpt and stores the response in the database
+  const addNewTask = async () => {
+    const assignmentName = document.getElementById("assignmentName").value;
+    const assignmentDueDate = document.getElementById("assignmentDueDate").value;
+    const assignmentDescription = document.getElementById("assignmentDescription").value; // Ensure this ID matches your input field for description
+    const course_id = courseId; // Ensure courseId is defined somewhere in your script
+  
+    try {
+      // Assume splitTask returns a valid response with a choices array
+      const gptResponse = await splitTask(assignmentDescription);
+      const content = gptResponse.choices[0].message.content;
+      const components = content.split(/\d+\.\s/).filter(Boolean);
+  
+      // Create the task object
+      const newTask = {
+        course_id,
+        name: assignmentName,
+        due_date: assignmentDueDate,
+        description: assignmentDescription,
+        components
+      };
+      console.log(newTask);
+      // Perform the POST request
+      const response = await fetch('http://localhost:3002/assignments/', { // Replace '/your-endpoint' with the actual path to your assignments API
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // If needed, set authorization headers or others depending on your API requirements
+        },
+        body: JSON.stringify(newTask)
+      });
+  
+      const result = await response.json();
+      console.log(result);
+  
+      // Handle the response here. If successful, maybe clear the form or redirect the user.
+  
+    } catch (error) {
+      console.error("Failed to add new task:", error);
+      // Handle errors, such as by displaying a message to the user.
+    }
+  };
+
+
 
   return (
     <>
@@ -82,7 +128,7 @@ const Course = () => {
               <input id="assignmentDueDate" type="date" />
               <label htmlFor="assignmentDescription">Description:</label>
               <textarea id="assignmentDescription" placeholder="Enter description"></textarea>
-              <button type="submit">Submit</button>
+              <button type="submit" onClick = {addNewTask}>Submit</button>
             </form>
           ):
           
