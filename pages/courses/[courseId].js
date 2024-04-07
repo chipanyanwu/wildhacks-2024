@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import TopBar from '../../components/TopBar';
-import styles from '../../styles/Course.module.css';
+import styles from '../../styles/Course.module.css'; // Ensure you have this CSS file
 
 const Course = () => {
   const router = useRouter();
@@ -40,6 +40,11 @@ const Course = () => {
     // const subTasks = await getSubTasksFromDescription(assignment.description);
     // console.log("Generated Sub-Tasks:", subTasks);
   };
+  const [buttonOn, setButtonOn] = useState(false);
+  const handleClick = () => {
+    setButtonOn(true);
+    
+  }
 
   return (
     <>
@@ -54,7 +59,7 @@ const Course = () => {
               
             ))}
           </ul>
-          <button>Add New Assignment</button>
+          <button onClick = {handleClick}>Add New Assignment</button>
         </aside>
         <main className={styles.mainContent}>
           {selectedAssignment ? (
@@ -69,9 +74,22 @@ const Course = () => {
                 ))}
               </ul>
             </>
-          ) : (
+          ) :buttonOn? (
+            <form>
+              <label htmlFor="assignmentName">Assignment Name:</label>
+              <input id="assignmentName" type="text" placeholder="Enter name" />
+              <label htmlFor="assignmentDueDate">Due Date:</label>
+              <input id="assignmentDueDate" type="date" />
+              <label htmlFor="assignmentDescription">Description:</label>
+              <textarea id="assignmentDescription" placeholder="Enter description"></textarea>
+              <button type="submit">Submit</button>
+            </form>
+          ):
+          
+          (
             <p>Select an assignment to view details.</p>
           )}
+          
         </main>
       </div>
     </>
