@@ -56,9 +56,9 @@ const Home = () => {
           A <strong>simple platform</strong> that gives you a <strong>step-by-step guide</strong> to get you started<br />
           with daunting <strong>class assignments</strong>!
         </p>
-        {/* <div className={styles.buttonContainer}>
+        <div className={styles.buttonContainer}>
           <Link href="/courses" className={styles.button} passHref>Courses</Link>
-        </div> */}
+        </div>
 
         <div className={styles.coursesContainer}>
           {courses.map((course: { _id: string, course_name: string }) => (

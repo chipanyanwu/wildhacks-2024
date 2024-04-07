@@ -9,20 +9,30 @@ import styles from '../../styles/Course.module.css'; // Ensure you have this CSS
 const Course = () => {
   const router = useRouter();
   const { courseId } = router.query;
+  const [allAssignments, setAllAssignments] = useState([]);
   const [assignments, setAssignments] = useState([]);
   const [selectedAssignment, setSelectedAssignment] = useState(null);
 
   useEffect(() => {
     const fetchAssignments = async () => {
-      const res = await fetch(`http://localhost:3002/assignments?course_id=${courseId}`);
+      // Fetch all assignments
+      const res = await fetch(`http://localhost:3002/assignments`);
       const data = await res.json();
-      setAssignments(data);
+      setAllAssignments(data);
     };
 
-    if (courseId) {
-      fetchAssignments();
+    fetchAssignments();
+  }, []);
+
+
+  useEffect(() => {
+    // Filter assignments by courseId after all assignments have been fetched
+    if(courseId) {
+      const filteredAssignments = allAssignments.filter(assignment => assignment.course_id === courseId);
+      console.log(allAssignments);
+      setAssignments(filteredAssignments);
     }
-  }, [courseId]);
+  }, [courseId, allAssignments]);
 
   const selectAssignment = (assignment) => {
     setSelectedAssignment(assignment);

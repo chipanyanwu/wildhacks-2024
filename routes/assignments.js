@@ -37,6 +37,28 @@ router.get('/:id', (req, res) => {
     res.send(`Get assignment with ID ${assignmentId}`);
 });
 
+// GET all assignments for a specific course
+// router.get('/:course_id', async (req, res) => {
+//     try {
+//         // const course_id = req.params.course_id; // Extract course_id from the request parameters
+//         const course_id = parseInt(req.params.course_id, 10);
+//         const db = await getDatabase();
+//         const assignmentscol = db.collection('assignments');
+        
+//         objectId = new ObjectId(course_id);
+//         // Use the course_id to filter assignments. Make sure to trim any accidental space in the key name if the data is inconsistent
+//         const assignments = await assignmentscol.find({"course_id": objectId}).toArray();
+        
+//         res.json(assignments);
+//     } catch (error) {
+//         console.error("Failed to fetch assignments:", error);
+//         res.status(500).json({error: "An error occurred while fetching assignments"});
+//     }
+// });
+
+
+  
+
 // CREATE a new assignment
 router.post('/', async (req, res) => {
     const { course_id, name, due_date, description, components } = req.body;
