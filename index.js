@@ -6,6 +6,7 @@ const router = express.Router();
 const app = express();
 const PORT = 3002;
 
+app.use(express.json());
 const coursesRoute = require('./routes/courses.js');
 const assignmentsRoute = require('./routes/assignments.js');
 
