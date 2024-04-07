@@ -28,6 +28,20 @@ router.get('/', async (req, res) => {
 
     res.json(assignments);
 });
+// GET assignments for a specific course
+router.get('/course/:courseId', async (req, res) => {
+    const courseId = req.params.courseId;
+    try {
+        const objectId = new ObjectId(courseId);
+        const db = await getDatabase();
+        const assignmentsCol = db.collection('assignments');
+        const assignments = await assignmentsCol.find({ course_id: objectId }).toArray();
+        res.json(assignments);
+    } catch (error) {
+        console.error("Failed to fetch assignments for course:", error);
+        res.status(500).json({ error: "Failed to fetch assignments for course" });
+    }
+});
 
 // GET a specific assignment by ID
 router.get('/:id', (req, res) => {

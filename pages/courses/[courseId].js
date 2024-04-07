@@ -51,8 +51,10 @@ const Course = () => {
               <li key={assignment._id} onClick={() => selectAssignment(assignment)}>
                 <a className={styles.assignmentLink}>{assignment.name}</a>
               </li>
+              
             ))}
           </ul>
+          <button>Add New Assignment</button>
         </aside>
         <main className={styles.mainContent}>
           {selectedAssignment ? (
