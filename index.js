@@ -13,7 +13,7 @@ const assignmentsRoute = require('./routes/assignments.js');
 async function getDatabase() {
     try {
         const client = await connectDB();
-        return client.db('WildHacks2024').collection('productivity');
+        return client.db('productivity').collection('productivity');
     } catch (error) {
         console.error("Failed to connect to the database:", error);
         throw error; // Rethrow the error after logging it, or handle it as needed
