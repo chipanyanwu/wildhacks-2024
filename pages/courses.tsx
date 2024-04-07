@@ -1,6 +1,8 @@
 import List from '../components/List';
 import TopBar from '../components/TopBar';
 import Link from 'next/link';
+import styles from '../styles/Home.module.css';
+
 
 const Courses = () => {
 
@@ -12,7 +14,9 @@ const Courses = () => {
       <>
         <TopBar />
         <div>
-        <Link href="/tasks"> Assignments</Link>
+          <div className={styles.buttonContainer}>
+          <Link href="/tasks" className={styles.button} passHref>Assignments</Link>
+          </div>
           <List items={CourseList} />
         </div>
       </>

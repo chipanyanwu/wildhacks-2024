@@ -1,0 +1,55 @@
+.welcomeContainer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+  }
+  
+  .welcomeTitle {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .welcomeDescription {
+    font-size: 2.2em;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  .linkList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .linkItem {
+    margin: 10px 0;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: #0070f3;
+    font-size: 1.2em;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+
+  .buttonContainer {
+    margin-top: 20px;
+  }
+  
+  .button {
+    display: inline-block;
+    background-color: #3b8ee6;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: lightblue;
+  }
+  

@@ -65,7 +65,7 @@ const Chat = () => {
             borderRadius: '4px',
           }}
         />
-        <button onClick={sendMessage} style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer', borderRadius: '4px' }}>Send</button>
+        <button onClick={sendMessage} style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer', borderRadius: '4px', backgroundColor: '#b2dffb'}}>Send</button>
       </div>
     </div>
   );

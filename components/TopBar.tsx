@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './topbar.module.css';
 import Image from 'next/image'; // Import Next.js Image component for the logo
+import { UserButton } from "@clerk/nextjs";
 
 const TopBar = () => {
   return (
