@@ -7,7 +7,7 @@ const TopBar = () => {
   return (
     <nav className={styles.topbar}>
       <div className={styles.left}>
-        <Link href="/">Todo </Link>
+        <Link href="/">ClassCompass</Link>
       </div>
       <div className={styles.right}>
         <Link href="/about">About</Link>

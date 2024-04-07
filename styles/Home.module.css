@@ -75,4 +75,33 @@
   .assignmentLink:active {
     transform: translateY(1px);
   }
+
+  /* .coursesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  } */
+
+  .coursesContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    gap: 20px;
+    padding: 20px;
+  }
   
+  .courseCard {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    display: block; /* Make sure the link takes up the whole card */
+    color: inherit; /* Prevent default link color */
+    text-decoration: none; /* Prevent default link text decoration */
+    transition: transform 0.2s; /* Optional: adds animation */
+  }
+  
+  .courseCard:hover {
+    transform: scale(1.05); /* Optional: scale cards on hover */
+    border-color: #3b8ee6; /* Optional: change border color on hover */
+  }

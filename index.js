@@ -1,9 +1,10 @@
 const express = require('express');
 const connectDB = require('./db.js');
+const cors = require('cors');
 const router = express.Router();
 
 const app = express();
-const PORT = 3000;
+const PORT = 3002;
 
 const coursesRoute = require('./routes/courses.js');
 const assignmentsRoute = require('./routes/assignments.js');
@@ -22,6 +23,7 @@ async function getDatabase() {
 
 getDatabase();
 
+app.use(cors());
 app.use('/courses', coursesRoute);
 app.use('/assignments', assignmentsRoute);
 
