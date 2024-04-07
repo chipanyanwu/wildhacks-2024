@@ -11,7 +11,7 @@ const GPT = () => {
       <>
         <TopBar />
         <div className={styles.welcomeContainer}>
-        <h1 className={styles.title}>Get detailed breakdown</h1>
+        <h1 className={styles.title}>Detailed Breakdown</h1>
             <Chat />
         </div>
       </>
