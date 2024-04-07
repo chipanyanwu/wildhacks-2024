@@ -49,6 +49,8 @@ const Course = () => {
 
   //THis function takes in input from the add new task button, sends to chat gpt and stores the response in the database
   const addNewTask = async () => {
+
+    console.log("Adding new task");
     const assignmentName = document.getElementById("assignmentName").value;
     const assignmentDueDate = document.getElementById("assignmentDueDate").value;
     const assignmentDescription = document.getElementById("assignmentDescription").value; // Ensure this ID matches your input field for description
@@ -108,7 +110,19 @@ const Course = () => {
           <button onClick = {handleClick}>Add New Assignment</button>
         </aside>
         <main className={styles.mainContent}>
-          {selectedAssignment ? (
+          {buttonOn? (
+            <form>
+              <label htmlFor="assignmentName">Assignment Name:</label>
+              <input id="assignmentName" type="text" placeholder="Enter name" />
+              <label htmlFor="assignmentDueDate">Due Date:</label>
+              <input id="assignmentDueDate" type="date" />
+              <label htmlFor="assignmentDescription">Description:</label>
+              <textarea id="assignmentDescription" placeholder="Enter description"></textarea>
+              <button type="submit" onClick = {addNewTask}>Submit</button>
+            </form>
+          ):
+          
+          selectedAssignment ? (
             <>
               <h2>{selectedAssignment.name}</h2>
               <p>Due: {new Date(selectedAssignment.due_date).toLocaleDateString()}</p>
@@ -120,17 +134,7 @@ const Course = () => {
                 ))}
               </ul>
             </>
-          ) :buttonOn? (
-            <form>
-              <label htmlFor="assignmentName">Assignment Name:</label>
-              <input id="assignmentName" type="text" placeholder="Enter name" />
-              <label htmlFor="assignmentDueDate">Due Date:</label>
-              <input id="assignmentDueDate" type="date" />
-              <label htmlFor="assignmentDescription">Description:</label>
-              <textarea id="assignmentDescription" placeholder="Enter description"></textarea>
-              <button type="submit" onClick = {addNewTask}>Submit</button>
-            </form>
-          ):
+          ) :
           
           (
             <p>Select an assignment to view details.</p>
