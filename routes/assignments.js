@@ -101,6 +101,7 @@ router.post('/', async (req, res) => {
         if (result.acknowledged && result.insertedId) {
             // Retrieve the newly created document if necessary
             const newAssignment = await assignmentsCol.findOne({ _id: result.insertedId });
+            console.log("New assignment created:", newAssignment);
             res.status(201).json(newAssignment);
         } else {
             throw new Error('Document was not inserted');
@@ -111,7 +112,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// UPDATE an existing assignment
 // UPDATE an existing assignment
 router.put('/:id', async (req, res) => {
     const assignmentId = req.params.id;
