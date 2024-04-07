@@ -7,6 +7,7 @@ import TopBar from '../../components/TopBar';
 import styles from '../../styles/Course.module.css'; // Ensure you have this CSS file
 import { set } from 'mongoose';
 const  splitTask  = require('../../openai.js');
+import Newstyles from '../../styles/Home.module.css'; 
 
 
 const Course = () => {
@@ -54,7 +55,7 @@ const Course = () => {
 
     event.preventDefault();
 
-    console.log("Adding new task");
+    console.log("Adding new task is being called");
     const assignmentName = document.getElementById("assignmentName").value;
     const assignmentDueDate = document.getElementById("assignmentDueDate").value;
     const assignmentDescription = document.getElementById("assignmentDescription").value; // Ensure this ID matches your input field for description
@@ -63,9 +64,9 @@ const Course = () => {
     try {
       // Assume splitTask returns a valid response with a choices array
       const gptResponse = await splitTask(assignmentDescription);
-      const content = gptResponse.message.content;
-      const components = content.split(/\d+\.\s/).filter(Boolean);
-      console.log(components);
+      //const content = gptResponse.message.content;
+      //const components = content.split(/\d+\.\s/).filter(Boolean);
+      //console.log(components);
   
       // Create the task object
       const newTask = {
@@ -73,7 +74,7 @@ const Course = () => {
         name: assignmentName,
         due_date: assignmentDueDate,
         description: assignmentDescription,
-        components: components
+        components: gptResponse
       };
       // console.log(newTask);
       // Perform the POST request
@@ -87,7 +88,7 @@ const Course = () => {
       });
   
       const result = await response.json();
-      console.log(result);
+   
   
       // Handle the response here. If successful, maybe clear the form or redirect the user.
       // window.location.reload();
@@ -113,7 +114,7 @@ const Course = () => {
           <ul>
             {assignments.map((assignment) => (
               <li key={assignment._id} onClick={() => selectAssignment(assignment)}>
-                <a className={styles.assignmentLink}>{assignment.name}</a>
+                <a className={Newstyles.assignmentList}>{assignment.name}</a>
               </li>
 
             // <li key={assignment._id} onClick={() => selectAssignment(assignment)}>
@@ -122,28 +123,30 @@ const Course = () => {
               
             ))}
           </ul>
-          <button onClick = {handleClick}>Add New Assignment</button>
+          <div className="buttonContainer">
+          <button onClick = {handleClick} className={Newstyles.assignmentLink}>Add New Assignment</button>
+          </div>
+
         </aside>
         <main className={styles.mainContent}>
           {buttonOn? (
-            <form>
+            <form onSubmit = {addNewTask}>
               <label htmlFor="assignmentName">Assignment Name:</label>
               <input id="assignmentName" type="text" placeholder="Enter name" />
               <label htmlFor="assignmentDueDate">Due Date:</label>
               <input id="assignmentDueDate" type="date" />
               <label htmlFor="assignmentDescription">Description:</label>
               <textarea id="assignmentDescription" placeholder="Enter description"></textarea>
-              <button type="submit" onClick = {(event) => addNewTask(event)}>Submit</button>
+              <button type="submit" >Submit</button>
             </form>
-          ):
-          
+          ) :           
           selectedAssignment ? (
             <>
-              <h2>{selectedAssignment.name}</h2>
-              <p>Due: {new Date(selectedAssignment.due_date).toLocaleDateString()}</p>
-              <p>{selectedAssignment.description}</p>
+              <h2 className={Newstyles.title}>{selectedAssignment.name}</h2>
+              <p className={Newstyles.paragraph}>Due: {new Date(selectedAssignment.due_date).toLocaleDateString()}</p>
+              <p className={Newstyles.paragraph}>{selectedAssignment.description}</p>
               <h3>Components</h3>
-              <ul>
+              <ul className={Newstyles.paragraph}>
                 {Object.entries(selectedAssignment.components).map(([key, value], index) => (
                   <li key={index}>{value}</li>
                 ))}
@@ -152,7 +155,7 @@ const Course = () => {
           ) :
           
           (
-            <p>Select an assignment to view details.</p>
+            <p className={Newstyles.title}>Select an assignment to view details.</p>
           )}
           
         </main>

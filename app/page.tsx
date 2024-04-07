@@ -12,35 +12,30 @@ const Home = () => {
   const [newCourseName, setNewCourseName] = useState(""); // Step 1
 
   useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch('http://localhost:3002/courses');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log(response);
+        const data = await response.json();
+        setCourses(data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        // Handle the error here. For example, update the UI to show an error message.
+      }
+    };
+ 
     fetchCourses();
   }, []);
 
-  const fetchCourses = async () => {
-    const response = await fetch('http://localhost:3002/courses');
-    console.log(response);
-    const data = await response.json();
-    setCourses(data);
-  };
-
-  const handleAddCourse = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent the form from submitting in the traditional way
-    const response = await fetch('http://localhost:3002/courses', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ course_name: newCourseName }),
-    });
-    if (response.ok) {
-      setNewCourseName(""); // Reset input field
-      await fetchCourses(); // Re-fetch courses or update state directly
-    }
-  };
 
   return (
     <>
       <TopBar />
         <div className={styles.welcomeContainer}>
+            <UserButton />
           <h1 className={styles.welcomeTitle}>Welcome to <span style={{ color: '#3b8ee6' }}>ClassCompass</span></h1>
           <p className={styles.welcomeDescription}>
           A <strong>simple platform</strong> that gives you a <strong>step-by-step guide</strong> to get you started<br />
