@@ -1,12 +1,29 @@
 const express = require('express');
+const connectDB = require('../db.js');
 
 const router = express.Router();
 
+async function getDatabase() {
+    try {
+        const client = await connectDB();
+        return client.db('productivity').collection('assignments');
+    } catch (error) {
+        console.error("Failed to connect to the database:", error);
+        throw error; // Rethrow the error after logging it, or handle it as needed
+    }
+}
+
+//getDatabase();
+
 // GET all assignments
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     // Logic to fetch all assignments from the database
     // ...
-    res.send({data : "Assignments are being fetched"});
+    const assignmentscol = await getDatabase()
+    const assignments = await assignmentscol.find({}).toArray();
+    console.log(assignments);
+
+    res.json(assignments);
 });
 
 // GET a specific assignment by ID
