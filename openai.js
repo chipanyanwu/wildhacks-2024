@@ -20,7 +20,7 @@ async function splitTask(description) {
     model: "gpt-3.5-turbo"
   });
 
-  console.log(completion.choices[0]['message']['content'].split(/\d+\.\s/).filter(Boolean));
+  // console.log(completion.choices[0]['message']['content'].split(/\d+\.\s/).filter(Boolean));
   return completion.choices[0];
 }
 

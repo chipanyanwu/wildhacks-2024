@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import TopBar from '../../components/TopBar';
 import styles from '../../styles/Course.module.css'; // Ensure you have this CSS file
+import { set } from 'mongoose';
 const  splitTask  = require('../../openai.js');
 
 
@@ -32,13 +33,14 @@ const Course = () => {
     // Filter assignments by courseId after all assignments have been fetched
     if(courseId) {
       const filteredAssignments = allAssignments.filter(assignment => assignment.course_id === courseId);
-      console.log(allAssignments);
+      // console.log(allAssignments);
       setAssignments(filteredAssignments);
     }
   }, [courseId, allAssignments]);
 
   const selectAssignment = async (assignment) => {
     setSelectedAssignment(assignment);
+    setButtonOn(false);
     // const subTasks = await getSubTasksFromDescription(assignment.description);
     // console.log("Generated Sub-Tasks:", subTasks);
   };
@@ -48,7 +50,9 @@ const Course = () => {
   }
 
   //THis function takes in input from the add new task button, sends to chat gpt and stores the response in the database
-  const addNewTask = async () => {
+  const addNewTask = async (event) => {
+
+    event.preventDefault();
 
     console.log("Adding new task");
     const assignmentName = document.getElementById("assignmentName").value;
@@ -59,18 +63,19 @@ const Course = () => {
     try {
       // Assume splitTask returns a valid response with a choices array
       const gptResponse = await splitTask(assignmentDescription);
-      const content = gptResponse.choices[0].message.content;
+      const content = gptResponse.message.content;
       const components = content.split(/\d+\.\s/).filter(Boolean);
+      console.log(components);
   
       // Create the task object
       const newTask = {
-        course_id,
+        course_id: course_id,
         name: assignmentName,
         due_date: assignmentDueDate,
         description: assignmentDescription,
-        components
+        components: components
       };
-      console.log(newTask);
+      // console.log(newTask);
       // Perform the POST request
       const response = await fetch('http://localhost:3002/assignments/', { // Replace '/your-endpoint' with the actual path to your assignments API
         method: 'POST',
@@ -85,6 +90,11 @@ const Course = () => {
       console.log(result);
   
       // Handle the response here. If successful, maybe clear the form or redirect the user.
+      // window.location.reload();
+
+      // const result = assignments[0];
+      setAssignments([...assignments, result]);
+      setSelectedAssignment(result);
   
     } catch (error) {
       console.error("Failed to add new task:", error);
@@ -99,11 +109,16 @@ const Course = () => {
       <TopBar />
       <div className={styles.courseLayout}>
         <aside className={styles.sidebar}>
+          <h2>{}</h2>
           <ul>
             {assignments.map((assignment) => (
               <li key={assignment._id} onClick={() => selectAssignment(assignment)}>
                 <a className={styles.assignmentLink}>{assignment.name}</a>
               </li>
+
+            // <li key={assignment._id} onClick={() => selectAssignment(assignment)}>
+            //   <Link className={styles.assignmentLink} href={`/assignments/${assignment._id}`}>{assignment.name}</Link>
+            // </li>
               
             ))}
           </ul>
@@ -118,7 +133,7 @@ const Course = () => {
               <input id="assignmentDueDate" type="date" />
               <label htmlFor="assignmentDescription">Description:</label>
               <textarea id="assignmentDescription" placeholder="Enter description"></textarea>
-              <button type="submit" onClick = {addNewTask}>Submit</button>
+              <button type="submit" onClick = {(event) => addNewTask(event)}>Submit</button>
             </form>
           ):
           
